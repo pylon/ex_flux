@@ -111,23 +111,4 @@ defmodule Inflex.Database.PoolWorker do
   def via_tuple(database) do
     {:via, Registry, {Inflex.Registry, database <> "_pool"}}
   end
-
-  def create_point(input) do
-    %{
-      measurement: "measure",
-      fields: %{
-        input: input,
-        value: :rand.uniform(10)
-      },
-      tags: %{
-        tag0:
-          if :rand.uniform() > 0.5 do
-            "val0"
-          else
-            "val1"
-          end
-      },
-      timestamp: System.os_time(:nanosecond)
-    }
-  end
 end
