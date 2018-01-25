@@ -1,8 +1,8 @@
 defmodule ExFlux.Database.Supervisor do
   @moduledoc """
-  Orchestration and supervision of inflex database components
+  Orchestration and supervision of ex_influx database components
 
-  The two components of an inflex database process: a "sliding buffer" queue,
+  The two components of an ex_influx database process: a "sliding buffer" queue,
   `ExFlux.Database.QueueWorker`, and a pool of connections to the influxdb
   server, `ExFlux.Database.PoolWorker`.
 
