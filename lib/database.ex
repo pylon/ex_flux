@@ -1,4 +1,4 @@
-defmodule Inflex.Database do
+defmodule ExFlux.Database do
   @moduledoc """
   Configuration of a single database's connection pool, queue and supervision
   tree. Since InfluxDB uses a single server UDP port per database, this
@@ -7,13 +7,13 @@ defmodule Inflex.Database do
 
   To get started, create your own module and do something like:
 
-      use Inflex.Database, otp_app: :your_app, database: "your_db_name"
+      use ExFlux.Database, otp_app: :your_app, database: "your_db_name"
 
-  In your application, simply add `YourApp.YourInflexDatabase` to the children:
+  In your application, simply add `YourApp.YourExFluxDatabase` to the children:
 
       children = [
         ...,
-        YourApp.YourInflexDatabase
+        YourApp.YourExFluxDatabase
       ]
 
   The database name isn't used for the UDP connection in anyway, but it is used
@@ -22,7 +22,7 @@ defmodule Inflex.Database do
   in the future, the database name is held by all workers in their
   configuration.
 
-  Where possible, `Inflex.Database.Supervisor` provides sane defaults for
+  Where possible, `ExFlux.Database.Supervisor` provides sane defaults for
   configuration options to make it as close as working out of the box as
   possible. A full list of configuration options and their types can be found
   there.
@@ -33,8 +33,8 @@ defmodule Inflex.Database do
       @otp_app Keyword.fetch!(opts, :otp_app)
       @database Keyword.get(opts, :database)
 
-      alias Inflex.Database.QueueWorker
-      alias Inflex.Database.Supervisor, as: DBSupervisor
+      alias ExFlux.Database.QueueWorker
+      alias ExFlux.Database.Supervisor, as: DBSupervisor
 
       def child_spec(opts) do
         %{
@@ -72,5 +72,5 @@ defmodule Inflex.Database do
   @doc """
   queue a single data point (may trigger a batch being sent asynchronously)
   """
-  @callback push(point :: Inflex.Point.t() | map()) :: :ok
+  @callback push(point :: ExFlux.Point.t() | map()) :: :ok
 end

@@ -1,14 +1,14 @@
-defmodule Inflex.LineProtocol do
+defmodule ExFlux.LineProtocol do
   @moduledoc """
   Complete implementation of the InfluxDB line protocol
 
-  Create stats in the line protocol format from `Inflex.Point`s. The format is
+  Create stats in the line protocol format from `ExFlux.Point`s. The format is
   `name,tag1=tval1,...,tagN=tvalN field1=val1,...,fieldN=valN timestamp` where
   tags and timestamp are optional. There must be at least one field. If the
   timestamp is not specified, influx will use its own server's time of receipt
   as the timestamp.
 
-  `Inflex.Point` in its typespecs defines the line protocols type system. There
+  `ExFlux.Point` in its typespecs defines the line protocols type system. There
   are additional rules for escaping characters that may or may not be present in a
   key or value depending on whether it is a measurement name, a tag key or
   value, or a field key or value.
@@ -23,7 +23,7 @@ defmodule Inflex.LineProtocol do
   @field_values ~r/\"/
   @measurement_names ~r/[,\s]/
 
-  @spec encode(point :: map() | Inflex.Point.t()) :: String.t()
+  @spec encode(point :: map() | ExFlux.Point.t()) :: String.t()
   @doc """
   takes maps of well defined points and turns them into single line strings
   """
@@ -72,7 +72,7 @@ defmodule Inflex.LineProtocol do
   end
 
   defp with_fields(_base, _point) do
-    raise Inflex.FieldError
+    raise ExFlux.FieldError
   end
 
   defp with_timestamp(base, %{timestamp: t}) when is_integer(t),

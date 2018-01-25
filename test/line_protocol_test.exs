@@ -1,7 +1,7 @@
-defmodule Inflex.LineProtocolTest do
+defmodule ExFlux.LineProtocolTest do
   use ExUnit.Case
 
-  alias Inflex.LineProtocol, as: LP
+  alias ExFlux.LineProtocol, as: LP
 
   describe "encode/1" do
     test "basic encoding" do
@@ -16,7 +16,7 @@ defmodule Inflex.LineProtocolTest do
     end
 
     test "no fields provided" do
-      assert_raise Inflex.FieldError, fn ->
+      assert_raise ExFlux.FieldError, fn ->
         LP.encode(%{measurement: "test"})
       end
     end

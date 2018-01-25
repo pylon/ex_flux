@@ -1,9 +1,9 @@
-defmodule Inflex.Point do
+defmodule ExFlux.Point do
   @moduledoc """
   Data points as Elixir structs
 
   For simplicity, timestamps are only dealt with in the unix format within the
-  library. Additionally, both in the typespecs and in the `Inflex.LineProtocol`
+  library. Additionally, both in the typespecs and in the `ExFlux.LineProtocol`
   implementation, strings and atoms can be used interchangably in places where
   the influx line protocol specification calls for strings.
   """

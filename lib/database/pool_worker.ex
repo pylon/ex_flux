@@ -1,4 +1,4 @@
-defmodule Inflex.Database.PoolWorker do
+defmodule ExFlux.Database.PoolWorker do
   @moduledoc """
   A single worker responsible for sending stats to the configured database
   """
@@ -7,8 +7,8 @@ defmodule Inflex.Database.PoolWorker do
 
   require Logger
 
-  alias Inflex.Conn.UDP
-  alias Inflex.LineProtocol
+  alias ExFlux.Conn.UDP
+  alias ExFlux.LineProtocol
 
   def child_spec(opts) do
     :poolboy.child_spec(:worker, poolboy_config(opts), opts)
@@ -48,7 +48,7 @@ defmodule Inflex.Database.PoolWorker do
     )
   end
 
-  @spec send_points(pid(), points :: [map() | Inflex.Point.t()]) :: :ok
+  @spec send_points(pid(), points :: [map() | ExFlux.Point.t()]) :: :ok
   @doc """
   Given an identified worker via `worker_pid/1` and points, asynchronously ship
   the points to influx.
@@ -109,6 +109,6 @@ defmodule Inflex.Database.PoolWorker do
 
   @doc false
   def via_tuple(database) do
-    {:via, Registry, {Inflex.Registry, database <> "_pool"}}
+    {:via, Registry, {ExFlux.Registry, database <> "_pool"}}
   end
 end

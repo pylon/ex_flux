@@ -1,10 +1,10 @@
-defmodule Inflex.Database.Supervisor do
+defmodule ExFlux.Database.Supervisor do
   @moduledoc """
   Orchestration and supervision of inflex database components
 
   The two components of an inflex database process: a "sliding buffer" queue,
-  `Inflex.Database.QueueWorker`, and a pool of connections to the influxdb
-  server, `Inflex.Database.PoolWorker`.
+  `ExFlux.Database.QueueWorker`, and a pool of connections to the influxdb
+  server, `ExFlux.Database.PoolWorker`.
 
   The options required by the queue are:
   * `:database` - the name of the database
@@ -29,7 +29,7 @@ defmodule Inflex.Database.Supervisor do
 
   use Supervisor
 
-  alias Inflex.Database.{PoolWorker, QueueWorker}
+  alias ExFlux.Database.{PoolWorker, QueueWorker}
 
   @type udp_opts :: [:gen_udp.option()]
   @type option ::
@@ -82,6 +82,6 @@ defmodule Inflex.Database.Supervisor do
   end
 
   def via_tuple(database) do
-    {:via, Registry, {Inflex.Registry, database <> "_supervisor"}}
+    {:via, Registry, {ExFlux.Registry, database <> "_supervisor"}}
   end
 end

@@ -1,9 +1,9 @@
-defmodule Inflex.Mixfile do
+defmodule ExFlux.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :inflex,
+      app: :ex_flux,
       version: "0.1.0",
       description: "InfluxDB driver for Elixir",
       elixir: "~> 1.5",
@@ -12,7 +12,7 @@ defmodule Inflex.Mixfile do
       deps: deps(),
       package: package(),
       docs: [
-        source_url: "https://github.com/pylon/inflex",
+        source_url: "https://github.com/pylon/ex_flux",
         extras: ["README.md"]
       ],
       test_coverage: [tool: ExCoveralls]
@@ -22,7 +22,7 @@ defmodule Inflex.Mixfile do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Inflex.Application, []}
+      mod: {ExFlux.Application, []}
     ]
   end
 
@@ -45,8 +45,8 @@ defmodule Inflex.Mixfile do
       maintainers: ["Neil Menne, Noel Weichbrodt"],
       licenses: ["Apache 2.0"],
       links: %{
-        "GitHub" => "https://github.com/pylon/inflex",
-        "Docs" => "http://hexdocs.pm/inflex/"
+        "GitHub" => "https://github.com/pylon/ex_flux",
+        "Docs" => "http://hexdocs.pm/ex_flux/"
       }
     ]
   end

@@ -1,4 +1,4 @@
-defmodule Inflex.FieldError do
+defmodule ExFlux.FieldError do
   @moduledoc """
   Raised when no fields were specified on the provided data point
   """
