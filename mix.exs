@@ -42,7 +42,7 @@ defmodule Inflex.Mixfile do
   defp package do
     [
       files: ["mix.exs", "README.md", "lib"],
-      maintainers: ["Neil Menne"],
+      maintainers: ["Neil Menne, Noel Weichbrodt"],
       licenses: ["Apache 2.0"],
       links: %{
         "GitHub" => "https://github.com/pylon/inflex",
