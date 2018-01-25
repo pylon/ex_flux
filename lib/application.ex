@@ -1,8 +1,8 @@
-defmodule Inflex.Application do
+defmodule ExFlux.Application do
   @moduledoc """
-  Inflex's per-node registry within the library's exported application
+  ExFlux's per-node registry within the library's exported application
 
-  Inflex uses `Registry` to support database-name-based dispatch as a primary
+  ExFlux uses `Registry` to support database-name-based dispatch as a primary
   design goal was multi-tenancy or sharding support for non-enterprise use
   cases.
   """
@@ -13,10 +13,10 @@ defmodule Inflex.Application do
     import Supervisor.Spec
 
     children = [
-      supervisor(Registry, [:unique, Inflex.Registry])
+      supervisor(Registry, [:unique, ExFlux.Registry])
     ]
 
-    opts = [strategy: :one_for_one, name: Inflex.Application]
+    opts = [strategy: :one_for_one, name: ExFlux.Application]
 
     Supervisor.start_link(children, opts)
   end

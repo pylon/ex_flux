@@ -1,8 +1,8 @@
-defmodule Inflex.Integration.DatabaseTest do
+defmodule ExFlux.Integration.DatabaseTest do
   use ExUnit.Case, async: false
 
-  alias Inflex.TestDatabase
-  alias Inflex.Database.{PoolWorker, QueueWorker}
+  alias ExFlux.TestDatabase
+  alias ExFlux.Database.{PoolWorker, QueueWorker}
 
   setup_all do
     TestDatabase.start_link([])

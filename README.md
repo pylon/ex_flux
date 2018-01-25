@@ -1,4 +1,4 @@
-# Inflex
+# ExFlux
 
 An [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/)
 driver that is designed from the ground up to bend, not break under load. In order to accomplish this there were three major design goals:
@@ -17,18 +17,18 @@ driver that is designed from the ground up to bend, not break under load. In ord
 
 ## Documentation
 
-Full documentation can be found on [hexdocs](https://hexdocs.pm/inflex)
+Full documentation can be found on [hexdocs](https://hexdocs.pm/ex_flux)
 
 
 ## Installation
 
 Now [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `inflex` to your list of dependencies in `mix.exs`:
+by adding `ex_flux` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:inflex, "~> 0.1.0"}
+    {:ex_flux, "~> 0.1.0"}
   ]
 end
 ```
@@ -40,10 +40,10 @@ exactly one configured database. Example configuration for InfluxDB .conf files
 can be found at the bottom of the [Influx udp protocol
 page](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md#config-examples)
 
-Create an `Inflex.Database` in your project:
+Create an `ExFlux.Database` in your project:
 ```elixir
 defmodule YourApp.SpecificDatabase do
-   use Inflex.Database, otp_app: :your_app, database: "database_name"
+   use ExFlux.Database, otp_app: :your_app, database: "database_name"
 end
 ```
 
@@ -51,11 +51,11 @@ Add it to your `application.ex`:
 ```elixir
       children = [
         ...,
-        YourApp.YourInflexDatabase
+        YourApp.YourInfluxDatabase
       ]
 ```
 
-To add points in a series, use `Inflex.Points` or regular elixir maps interchangeably. A helper for defining series schema is a [Near Term TODO](https://github.com/pylon/inflex#near-term-todos).
+To add points in a series, use `ExFlux.Points` or regular elixir maps interchangeably. A helper for defining series schema is a [Near Term TODO](https://github.com/pylon/ex_flux#near-term-todos).
 
 ```elixir
 iex(1)> point = %{measurement: "series_name", fields: %{value: 1}, tags: %{}, timestamp: System.os_time(:nanosecond)}

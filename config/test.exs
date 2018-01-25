@@ -2,7 +2,7 @@ use Mix.Config
 
 config :logger, level: :warn
 
-config :inflex, Inflex.TestDatabase,
+config :ex_flux, ExFlux.TestDatabase,
   database: "test",
   host: "localhost",
   udp_port: 8089,

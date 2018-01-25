@@ -1,4 +1,4 @@
-defmodule Inflex.Conn.UDP do
+defmodule ExFlux.Conn.UDP do
   @moduledoc """
   Light, opinionated wrapper around `:gen_udp`
   """

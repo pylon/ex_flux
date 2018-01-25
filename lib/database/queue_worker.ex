@@ -1,6 +1,6 @@
-defmodule Inflex.Database.QueueWorker do
+defmodule ExFlux.Database.QueueWorker do
   @moduledoc """
-  Async queueing of `Inflex.Point`s and load shedding per database
+  Async queueing of `ExFlux.Point`s and load shedding per database
 
   Batching must be done per-database. To support this effectively, a single
   worker for each database receives datapoints from your service. If the queue
@@ -13,7 +13,7 @@ defmodule Inflex.Database.QueueWorker do
 
   use GenServer
 
-  alias Inflex.Database.PoolWorker
+  alias ExFlux.Database.PoolWorker
 
   @defaults %{
     batch_size: 10,
@@ -111,5 +111,5 @@ defmodule Inflex.Database.QueueWorker do
 
   @doc false
   def via_tuple(database),
-    do: {:via, Registry, {Inflex.Registry, database <> "_queue"}}
+    do: {:via, Registry, {ExFlux.Registry, database <> "_queue"}}
 end

@@ -1,4 +1,4 @@
-defmodule Inflex.TestDatabase do
+defmodule ExFlux.TestDatabase do
   @moduledoc false
-  use Inflex.Database, otp_app: :inflex
+  use ExFlux.Database, otp_app: :ex_flux
 end
