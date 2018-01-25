@@ -1,9 +1,9 @@
 defmodule Inflex.Database do
   @moduledoc """
   Configuration of a single database's connection pool, queue and supervision
-  tree. Since InfluxDB uses a single UDP port on the server per database, this
+  tree. Since InfluxDB uses a single server UDP port per database, this
   library's goal is to make it easy to do 1:1 mappings of a pool of UDP
-  connections to that destination port and batching of datapoints.
+  connections to that destination's port and batching datapoints.
 
   To get started, create your own module and do something like:
 

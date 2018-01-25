@@ -1,6 +1,6 @@
 defmodule Inflex.Application do
   @moduledoc """
-  Inflex's per-node registry w/in the library's exported application
+  Inflex's per-node registry within the library's exported application
 
   Inflex uses `Registry` to support database-name-based dispatch as a primary
   design goal was multi-tenancy or sharding support for non-enterprise use

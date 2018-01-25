@@ -1,6 +1,6 @@
 defmodule Inflex.Database.PoolWorker do
   @moduledoc """
-  single worker responsible for sending stats to the configured database
+  A single worker responsible for sending stats to the configured database
   """
 
   use GenServer
