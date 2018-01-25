@@ -1,19 +1,18 @@
 # Inflex
 
 An [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/)
-driver that is designed from the ground up to bend, not break under load. In
-order to accomplish this, there were three major design goals:
+driver that is designed from the ground up to bend, not break under load. In order to accomplish this there were three major design goals:
 
 1. Effectively utilize the [InfluxDB UDP
    protocol](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
    by making batched writes a part of the library.
-2. Support the complete [line
+2. Support the complete [Influx line
    protocol](https://docs.influxdata.com/influxdb/v1.4/write_protocols/line_protocol_reference/)
    with proper escaping and type support
-3. Account and plan for how to handle/shed load when stats cannot be shipped
-   fast enough. This is done by prioritizing casts over calls as well as
-   allowing the queue to drop datapoints, oldest first, when the queue is full
-   and all UDP socket workers are busy.
+3. Handle load accountably and shed load in a defined [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) manner when stats cannot be shipped
+   fast enough:
+   -  prioritize casts over calls 
+   -  [drop datapoints from the queue, oldest first](https://clojuredocs.org/clojure.core.async/sliding-buffer), when the queue is full and all UDP socket workers are busy.
    
 
 ## Documentation
@@ -36,10 +35,10 @@ end
 
 ## Example
 
-As explained in the UDP protocol, InfluxDB specifies that a UDP port maps to
+As explained in the [Influx UDP protocol](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md), InfluxDB specifies that a UDP port maps to
 exactly one configured database. Example configuration for InfluxDB .conf files
-can be found at the bottom of the [udp protocol
-page](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
+can be found at the bottom of the [Influx udp protocol
+page](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md#config-examples)
 
 Create an `Inflex.Database` in your project:
 ```elixir
@@ -48,7 +47,7 @@ defmodule YourApp.SpecificDatabase do
 end
 ```
 
-Add it to your application:
+Add it to your `application.ex`:
 ```elixir
       children = [
         ...,
@@ -56,8 +55,7 @@ Add it to your application:
       ]
 ```
 
-Currently, there isn't a helper for defining series schema, but you can just use
-`Inflex.Point`s or regular elixir maps interchangably for now:
+To add points in a series, use `Inflex.Points` or regular elixir maps interchangeably. A helper for defining series schema is a [Near Term TODO](https://github.com/pylon/inflex#near-term-todos).
 
 ```elixir
 iex(1)> point = %{measurement: "series_name", fields: %{value: 1}, tags: %{}, timestamp: System.os_time(:nanosecond)}
