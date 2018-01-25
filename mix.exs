@@ -5,6 +5,7 @@ defmodule Inflex.Mixfile do
     [
       app: :inflex,
       version: "0.1.0",
+      description: "InfluxDB driver for Elixir",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
