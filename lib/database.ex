@@ -31,7 +31,7 @@ defmodule Inflex.Database do
   defmacro __using__(opts) do
     quote bind_quoted: [opts: opts] do
       @otp_app Keyword.fetch!(opts, :otp_app)
-      @database Keyword.fetch!(opts, :database)
+      @database Keyword.get(opts, :database)
 
       alias Inflex.Database.QueueWorker
       alias Inflex.Database.Supervisor, as: DBSupervisor
@@ -45,12 +45,24 @@ defmodule Inflex.Database do
       end
 
       def start_link(opts \\ []) do
-        opts = Keyword.put(opts, :database, @database)
+        opts = Keyword.put_new(opts, :database, @database)
         DBSupervisor.start_link(__MODULE__, @otp_app, opts)
       end
 
       def push(%{} = point) do
-        GenServer.cast(QueueWorker.via_tuple(@database), {:push, point})
+        GenServer.cast(
+          @database |> database_name() |> QueueWorker.via_tuple(),
+          {:push, point}
+        )
+      end
+
+      @spec database_name(prov :: String.t()) :: String.t()
+      defp database_name(prov) when is_binary(prov), do: prov
+
+      defp database_name(_prov) do
+        @otp_app
+        |> Application.get_env(__MODULE__, [])
+        |> Keyword.get(:database)
       end
 
       defoverridable child_spec: 1

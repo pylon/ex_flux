@@ -42,7 +42,6 @@ defmodule Inflex.Database.Supervisor do
   @defaults %{
     pool_size: 5,
     pool_overflow: 0,
-    pool_send_timeout: 1_000,
     udp_conn_opts: [:binary, {:active, false}]
   }
 
@@ -50,7 +49,7 @@ defmodule Inflex.Database.Supervisor do
     final_opts =
       mod
       |> process_env(otp_app)
-      |> Map.put(:database, Keyword.fetch!(opts, :database))
+      |> Map.put_new(:database, Keyword.get(opts, :database))
 
     Supervisor.start_link(
       __MODULE__,

@@ -9,7 +9,11 @@ defmodule Inflex.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      source_url: "https://github.com/pylon/inflex",
+      package: package(),
+      docs: [
+        source_url: "https://github.com/pylon/inflex",
+        extras: ["README.md"]
+      ],
       test_coverage: [tool: ExCoveralls]
     ]
   end
@@ -31,6 +35,18 @@ defmodule Inflex.Mixfile do
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:excoveralls, "~> 0.8", only: :test},
       {:dialyxir, "~> 0.5", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      files: ["mix.exs", "README.md", "lib"],
+      maintainers: ["Neil Menne"],
+      licenses: ["Apache 2.0"],
+      links: %{
+        "GitHub" => "https://github.com/pylon/inflex",
+        "Docs" => "http://hexdocs.pm/inflex/"
+      }
     ]
   end
 end

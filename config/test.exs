@@ -3,6 +3,7 @@ use Mix.Config
 config :logger, level: :warn
 
 config :inflex, Inflex.TestDatabase,
+  database: "test",
   host: "localhost",
   udp_port: 8089,
   batch_size: 5,
