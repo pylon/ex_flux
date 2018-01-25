@@ -1,6 +1,6 @@
 # Inflex
 
-An [InfluxDB driver](https://www.influxdata.com/time-series-platform/influxdb/)
+An [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/)
 driver that is designed from the ground up to bend, not break under load. In
 order to accomplish this, there were three major design goals:
 
