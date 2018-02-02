@@ -42,7 +42,7 @@ page](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md#
 
 Create an `ExFlux.Database` in your project:
 ```elixir
-defmodule YourApp.SpecificDatabase do
+defmodule YourApp.YourInfluxDatabase do
    use ExFlux.Database, otp_app: :your_app, database: "database_name"
 end
 ```
