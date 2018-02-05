@@ -20,7 +20,7 @@ defmodule ExFlux.Mixfile do
         coveralls: :test,
         "coveralls.html": :test,
         "coveralls.post": :test
-      ],
+      ]
     ]
   end
 
