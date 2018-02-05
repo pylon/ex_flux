@@ -15,7 +15,12 @@ defmodule ExFlux.Mixfile do
         source_url: "https://github.com/pylon/ex_flux",
         extras: ["README.md"]
       ],
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.html": :test,
+        "coveralls.post": :test
+      ],
     ]
   end
 

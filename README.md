@@ -11,11 +11,14 @@ driver that is designed from the ground up to bend, not break under load. In ord
    with proper escaping and type support
 3. Handle load accountably and shed load in a defined [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) manner when stats cannot be shipped
    fast enough:
-   -  prioritize casts over calls 
+   -  prioritize casts over calls
    -  [drop datapoints from the queue, oldest first](https://clojuredocs.org/clojure.core.async/sliding-buffer), when the queue is full and all UDP socket workers are busy.
-   
 
-## Documentation
+
+## Status
+[![Hex](http://img.shields.io/hexpm/v/ex_flux.svg?style=flat)](https://hex.pm/packages/ex_flux)
+[![Test](http://circleci-badges-max.herokuapp.com/img/pylon/ex_flux?token=:circle-ci-token)](https://circleci.com/gh/pylon/ex_flux)
+[![Coverage](https://coveralls.io/repos/github/pylon/ex_flux/badge.svg)](https://coveralls.io/github/pylon/ex_flux)
 
 Full documentation can be found on [hexdocs](https://hexdocs.pm/ex_flux)
 
