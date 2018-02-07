@@ -56,13 +56,11 @@ defmodule ExFlux.Database do
         )
       end
 
-      @spec database_name(prov :: String.t()) :: String.t()
-      defp database_name(prov) when is_binary(prov), do: prov
-
-      defp database_name(_prov) do
+      @spec database_name(prov :: String.t() | nil) :: String.t()
+      defp database_name(prov) do
         @otp_app
         |> Application.get_env(__MODULE__, [])
-        |> Keyword.get(:database)
+        |> Keyword.get(:database, prov)
       end
 
       defoverridable child_spec: 1

@@ -23,7 +23,7 @@ defmodule ExFlux.Database.Supervisor do
     `:gen_udp`, defaults to `[:binary, {:active, false}]` since we are
     exclusively writing
   * `:host` - hostname of the influxdb server
-  * `:port` - the port number influxdb is listening on for this particular
+  * `:udp_port` - the port number influxdb is listening on for this particular
     database
   """
 
