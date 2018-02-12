@@ -36,7 +36,10 @@ defmodule ExFlux.Mixfile do
 
   defp deps do
     [
+      {:poison, "~> 3.1"},
+      {:httpoison, "~> 1.0"},
       {:poolboy, "~> 1.5"},
+      {:mock, "~> 0.3", only: :test, runtime: false},
       {:credo, "~> 0.5", only: :dev, runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:excoveralls, "~> 0.8", only: :test},
