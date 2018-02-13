@@ -4,7 +4,7 @@ defmodule ExFlux.Mixfile do
   def project do
     [
       app: :ex_flux,
-      version: "0.1.1",
+      version: "0.1.3",
       description: "InfluxDB driver for Elixir",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -50,7 +50,7 @@ defmodule ExFlux.Mixfile do
   defp package do
     [
       files: ["mix.exs", "README.md", "lib"],
-      maintainers: ["Neil Menne, Noel Weichbrodt"],
+      maintainers: ["Neil Menne", "Noel Weichbrodt"],
       licenses: ["Apache 2.0"],
       links: %{
         "GitHub" => "https://github.com/pylon/ex_flux",
