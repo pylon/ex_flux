@@ -15,23 +15,12 @@ defmodule ExFlux.Database.QueueWorker do
 
   alias ExFlux.Database.PoolWorker
 
-  @defaults %{
-    batch_size: 10,
-    max_queue_size: 100,
-    flush_interval: 10
-  }
-
   @doc false
   def start_link(opts) do
-    config =
-      opts
-      |> Map.new()
-      |> with_defaults()
-
     GenServer.start_link(
       __MODULE__,
-      config,
-      name: via_tuple(config.database)
+      opts,
+      name: via_tuple(opts.database)
     )
   end
 
@@ -46,11 +35,6 @@ defmodule ExFlux.Database.QueueWorker do
   def init(config) do
     schedule_flush(config.flush_interval)
     {:ok, %{queue: :queue.new(), config: config, size: 0}}
-  end
-
-  @doc false
-  def handle_call(:peek, _sender, state) do
-    {:reply, state, state}
   end
 
   @doc false
@@ -106,8 +90,6 @@ defmodule ExFlux.Database.QueueWorker do
   defp schedule_flush(interval_in_sec) do
     Process.send_after(self(), :flush, interval_in_sec * 1000)
   end
-
-  defp with_defaults(config), do: Map.merge(@defaults, config)
 
   @doc false
   def via_tuple(database),

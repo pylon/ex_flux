@@ -33,7 +33,7 @@ defmodule ExFlux.Database do
       @otp_app Keyword.fetch!(opts, :otp_app)
       @database Keyword.get(opts, :database)
 
-      alias ExFlux.Database.QueueWorker
+      alias ExFlux.Database.{HTTPWorker, QueueWorker}
       alias ExFlux.Database.Supervisor, as: DBSupervisor
 
       def child_spec(opts) do
@@ -49,11 +49,19 @@ defmodule ExFlux.Database do
         DBSupervisor.start_link(__MODULE__, @otp_app, opts)
       end
 
+      def post(query_string) do
+        HTTPWorker.post(@database |> database_name(), query_string)
+      end
+
       def push(%{} = point) do
         GenServer.cast(
           @database |> database_name() |> QueueWorker.via_tuple(),
           {:push, point}
         )
+      end
+
+      def query(query_string) do
+        HTTPWorker.query(@database |> database_name(), query_string)
       end
 
       @spec database_name(prov :: String.t() | nil) :: String.t()
@@ -68,7 +76,18 @@ defmodule ExFlux.Database do
   end
 
   @doc """
+  POST to the /query for the configured database. This is used for queries that
+  mutate the database. See `ExFlux.Conn.HTTP.post_query/2` for more details
+  """
+  @callback post(query_string :: String.t()) :: map() | {:error, any()}
+
+  @doc """
   queue a single data point (may trigger a batch being sent asynchronously)
   """
   @callback push(point :: ExFlux.Point.t() | map()) :: :ok
+
+  @doc """
+  using the dataabase's http configuration, query the influx database
+  """
+  @callback query(query_string :: String.t()) :: map() | {:error, any()}
 end
