@@ -25,6 +25,11 @@ defmodule ExFlux.Integration.DatabaseTest do
   end
 
   @tag :integration
+  test "ping" do
+    assert :ok == TestDatabase.ping()
+  end
+
+  @tag :integration
   test "push and flush" do
     0..3
     |> Stream.map(&create_point/1)

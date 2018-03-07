@@ -4,7 +4,7 @@ defmodule ExFlux.Mixfile do
   def project do
     [
       app: :ex_flux,
-      version: "0.1.3",
+      version: "0.1.4",
       description: "InfluxDB driver for Elixir",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),

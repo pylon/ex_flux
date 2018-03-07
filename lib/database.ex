@@ -53,6 +53,10 @@ defmodule ExFlux.Database do
         HTTPWorker.post(@database |> database_name(), query_string)
       end
 
+      def ping do
+        @database |> database_name() |> HTTPWorker.ping()
+      end
+
       def push(%{} = point) do
         GenServer.cast(
           @database |> database_name() |> QueueWorker.via_tuple(),
@@ -74,6 +78,13 @@ defmodule ExFlux.Database do
       defoverridable child_spec: 1
     end
   end
+
+  @doc """
+  GET query against the /ping endpoint in order to get the status of the
+  influxdb instance. If the server is alive, we expect a 204 response and will
+  return `:ok` or an `{:error, reason}` tuple otherwise
+  """
+  @callback ping :: :ok | {:error, reason :: any()}
 
   @doc """
   POST to the /query for the configured database. This is used for queries that

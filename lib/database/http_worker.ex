@@ -25,6 +25,19 @@ defmodule ExFlux.Database.HTTPWorker do
     {:ok, nil}
   end
 
+  @spec ping(database :: String.t()) :: :ok | {:error, reason :: any()}
+  @doc """
+  Use the database specific info to ping the target influx server
+  """
+  def ping(database) do
+    opts =
+      database
+      |> table_name()
+      |> opts_lookup()
+
+    HTTP.ping(opts)
+  end
+
   @spec query(database :: String.t(), query_string :: String.t()) ::
           map() | {:error, any()}
   @doc """
