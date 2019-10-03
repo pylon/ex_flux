@@ -11,7 +11,7 @@ defmodule ExFlux.Database.PoolWorker do
   alias ExFlux.LineProtocol
 
   def child_spec(opts) do
-    :poolboy.child_spec(:worker, poolboy_config(opts), opts)
+    :poolboy.child_spec(:worker, poolboy_config(opts), Map.to_list(opts))
   end
 
   defp poolboy_config(opts) do
@@ -89,7 +89,7 @@ defmodule ExFlux.Database.PoolWorker do
 
   def handle_info({:init, opts}, _state) do
     udp_opts =
-      Map.get(
+      Keyword.get(
         opts,
         :udp_conn_opts
       )
