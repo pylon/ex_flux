@@ -4,7 +4,7 @@ defmodule ExFlux.Mixfile do
   def project do
     [
       app: :ex_flux,
-      version: "0.2.0",
+      version: "0.2.1",
       description: "InfluxDB driver for Elixir",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -36,7 +36,7 @@ defmodule ExFlux.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 4.0", optional: true},
+      {:poison, "~> 3.0 or ~> 4.0", optional: true},
       {:httpoison, "~> 1.0"},
       {:poolboy, "~> 1.5"},
       {:mock, "~> 0.3", only: :test, runtime: false},
