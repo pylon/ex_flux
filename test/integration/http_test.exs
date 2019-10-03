@@ -132,7 +132,7 @@ defmodule ExFlux.Integration.HTTPTest do
       http_opts = [timeout: 0]
       no_time = Map.put(opts, :http_opts, http_opts)
 
-      {:error, :connect_timeout} =
+      {:error, :checkout_timeout} =
         HTTP.query("select * from sample_metric", no_time)
     end
 

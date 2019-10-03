@@ -2,8 +2,8 @@ defmodule ExFlux.Integration.DatabaseTest do
   use ExUnit.Case, async: false
 
   alias ExFlux.Conn.HTTP
+  alias ExFlux.Database.{HTTPWorker, PoolWorker, QueueWorker}
   alias ExFlux.TestDatabase
-  alias ExFlux.Database.{PoolWorker, QueueWorker, HTTPWorker}
 
   setup_all do
     TestDatabase.start_link([])
