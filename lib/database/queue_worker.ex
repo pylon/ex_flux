@@ -24,14 +24,14 @@ defmodule ExFlux.Database.QueueWorker do
     )
   end
 
-  @spec init(config :: map()) ::
-          {:ok,
-           %{queue: :queue.queue(), config: map(), size: non_neg_integer()}}
   @doc """
   Schedule a the initial flush of queued data points, create the `:queue`, and
   initialize the size which is tracked manually to avoid calculating the length
   of the queue via `:queue.len/1`
   """
+  @spec init(config :: map()) ::
+          {:ok,
+           %{queue: :queue.queue(), config: map(), size: non_neg_integer()}}
   def init(config) do
     schedule_flush(config.flush_interval)
     {:ok, %{queue: :queue.new(), config: config, size: 0}}
@@ -64,6 +64,7 @@ defmodule ExFlux.Database.QueueWorker do
     {:noreply, state}
   end
 
+  @doc false
   def handle_info(:flush, %{queue: queue, size: size} = state) do
     schedule_flush(state.config.flush_interval)
 

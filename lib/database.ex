@@ -16,7 +16,7 @@ defmodule ExFlux.Database do
         YourApp.YourExFluxDatabase
       ]
 
-  The database name isn't used for the UDP connection in anyway, but it is used
+  The database name isn't used for the UDP connection in any way, but it is used
   to create database-specific workers. To support querying interfaces and HTTP
   based sending, the database would need to be known. To support these features
   in the future, the database name is held by all workers in their

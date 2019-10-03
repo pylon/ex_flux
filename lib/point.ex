@@ -9,12 +9,24 @@ defmodule ExFlux.Point do
   """
 
   @type influx_string :: String.t() | atom()
+
   @type timestamp :: integer()
+
   @type field_value :: influx_string() | boolean() | number()
+
   @type field_map :: %{influx_string() => field_value()}
+
   @type tag_value :: influx_string()
+
   @type tag_map :: %{optional(influx_string()) => tag_value()}
-  @type t :: %__MODULE__{measurement: String.t(), fields: field_map}
+
+  @type t :: %__MODULE__{
+          measurement: String.t(),
+          fields: field_map(),
+          tags: tag_map(),
+          timestamp: timestamp()
+        }
+
   @enforce_keys [:measurement, :fields]
   defstruct [:measurement, :timestamp, fields: %{}, tags: %{}]
 end

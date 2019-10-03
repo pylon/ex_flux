@@ -25,10 +25,10 @@ defmodule ExFlux.Database.HTTPWorker do
     {:ok, nil}
   end
 
-  @spec ping(database :: String.t()) :: :ok | {:error, reason :: any()}
   @doc """
   Use the database specific info to ping the target influx server
   """
+  @spec ping(database :: String.t()) :: :ok | {:error, reason :: any()}
   def ping(database) do
     opts =
       database
@@ -38,11 +38,11 @@ defmodule ExFlux.Database.HTTPWorker do
     HTTP.ping(opts)
   end
 
-  @spec query(database :: String.t(), query_string :: String.t()) ::
-          map() | {:error, any()}
   @doc """
   Using the database specific configuration, execute the query
   """
+  @spec query(database :: String.t(), query_string :: String.t()) ::
+          map() | {:error, any()}
   def query(database, query_string) do
     opts =
       database
@@ -52,12 +52,12 @@ defmodule ExFlux.Database.HTTPWorker do
     HTTP.query(query_string, opts)
   end
 
-  @spec post(database :: String.t(), query_string :: String.t()) ::
-          map() | {:error, any()}
   @doc """
   Use the `:post` HTTP request method to send the query string to the provided
   database.
   """
+  @spec post(database :: String.t(), query_string :: String.t()) ::
+          map() | {:error, any()}
   def post(database, query_string) do
     opts =
       database
@@ -67,12 +67,12 @@ defmodule ExFlux.Database.HTTPWorker do
     HTTP.post_query(query_string, opts)
   end
 
-  @spec write(database :: String.t(), points :: [Point.t() | map()]) ::
-          :ok | {:error, any()}
   @doc """
   Use HTTP request/response semantics to ship metrics to the specific influx
   database. This is especially useful when UDP is not a viable option.
   """
+  @spec write(database :: String.t(), points :: [Point.t() | map()]) ::
+          :ok | {:error, any()}
   def write(database, points) do
     opts =
       database
