@@ -19,7 +19,7 @@ defmodule ExFlux.Conn.HTTP do
   }
 
   @doc """
-  check the status of the influxdb instance
+  Check the status of the influxdb instance
   """
   def ping(opts) do
     headers = [] |> with_auth(opts)
@@ -34,8 +34,11 @@ defmodule ExFlux.Conn.HTTP do
   end
 
   @doc """
-  queries that do not mutate the data (i.e. select and show). "select ... into"
-  queries do mutations, so `post_query/2` should be used in this case
+  Read data from influxdb
+
+  This method is reserved for non-mutating queries (i.e. select and show). As a
+  counter example, "select ... into" queries actually do mutations, so
+  `post_query/2` should be used in this case
   """
   def query(query_string, opts) do
     headers = [] |> with_auth(opts)
@@ -61,8 +64,10 @@ defmodule ExFlux.Conn.HTTP do
   end
 
   @doc """
-  queries that mutate the database or insert data (i.e. select...into, alter,
-  create, etc)
+  Mutate the influxdb schema
+
+  This method with appropriate credentials is used to create
+  databases, create or alter retention policies, etc.
   """
   def post_query(query_string, opts) do
     headers =
@@ -90,7 +95,7 @@ defmodule ExFlux.Conn.HTTP do
   end
 
   @doc """
-  ship datapoints to a pre-existing database when UDP is unreliable or unacceptable
+  Ship datapoints to influxdb over HTTP when UDP is unreliable or unacceptable
   """
   def write(encoded_points, opts) do
     headers =

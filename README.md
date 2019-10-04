@@ -17,7 +17,7 @@ driver that is designed from the ground up to bend, not break under load. In ord
 
 ## Status
 [![Hex](http://img.shields.io/hexpm/v/ex_flux.svg?style=flat)](https://hex.pm/packages/ex_flux)
-[![Test](http://circleci-badges-max.herokuapp.com/img/pylon/ex_flux?token=:circle-ci-token)](https://circleci.com/gh/pylon/ex_flux)
+[![CircleCI](https://circleci.com/gh/pylon/ex_flux/tree/master.svg?style=svg)](https://circleci.com/gh/pylon/ex_flux/tree/master)
 [![Coverage](https://coveralls.io/repos/github/pylon/ex_flux/badge.svg)](https://coveralls.io/github/pylon/ex_flux)
 
 Full documentation can be found on [hexdocs](https://hexdocs.pm/ex_flux)
@@ -58,7 +58,7 @@ Add it to your `application.ex`:
       ]
 ```
 
-To add points in a series, use `ExFlux.Points` or regular elixir maps interchangeably. A helper for defining series schema is a [Near Term TODO](https://github.com/pylon/ex_flux#near-term-todos).
+To add points in a series, use `ExFlux.Point`s or regular elixir maps interchangeably. A helper for defining series schema is a [Near Term TODO](https://github.com/pylon/ex_flux#near-term-todos).
 
 ```elixir
 iex(1)> point = %{measurement: "series_name", fields: %{value: 1}, tags: %{}, timestamp: System.os_time(:nanosecond)}
@@ -72,7 +72,6 @@ The point will be queued asynchronously and either flushed or sent as part of a 
 
 * series specification
 * timestamp granularity support
-* query interface
 * test for load shedding
 
 

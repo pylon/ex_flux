@@ -39,7 +39,9 @@ defmodule ExFlux.Database.Supervisor do
   alias ExFlux.Database.{HTTPWorker, PoolWorker, QueueWorker}
 
   @udp_opts [:binary, {:active, false}]
+
   @http_opts [timeout: 5000]
+
   @defaults %{
     host: "localhost",
     batch_size: 10,
@@ -78,11 +80,11 @@ defmodule ExFlux.Database.Supervisor do
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  @spec process_env(atom(), atom()) :: map()
   @doc """
   Merge the config and defaults to create a single cohesive configuration map to
   be used by the pool worker, poolboy, and the queue worker.
   """
+  @spec process_env(atom(), atom()) :: map()
   def process_env(mod, otp_app) do
     config_opts =
       otp_app

@@ -8,7 +8,7 @@ defmodule ExFlux.Database.PoolWorker do
   require Logger
 
   alias ExFlux.Conn.UDP
-  alias ExFlux.LineProtocol
+  alias ExFlux.{LineProtocol, Point}
 
   def child_spec(opts) do
     :poolboy.child_spec(:worker, poolboy_config(opts), Map.to_list(opts))
@@ -36,11 +36,11 @@ defmodule ExFlux.Database.PoolWorker do
     {:ok, %{}}
   end
 
-  @spec worker_pid(database :: String.t()) :: pid() | :full
   @doc """
   Perform a non-blocking checkout of an available worker for sending data. If no
   worker is available, `:poolboy.checkout/2` will return `:full`
   """
+  @spec worker_pid(database :: String.t()) :: pid() | :full
   def worker_pid(database) do
     :poolboy.checkout(
       via_tuple(database),
@@ -48,11 +48,11 @@ defmodule ExFlux.Database.PoolWorker do
     )
   end
 
-  @spec send_points(pid(), points :: [map() | ExFlux.Point.t()]) :: :ok
   @doc """
   Given an identified worker via `worker_pid/1` and points, asynchronously ship
   the points to influx.
   """
+  @spec send_points(pid(), points :: [Point.t() | map()]) :: :ok
   def send_points(pid, points), do: GenServer.cast(pid, {:send, points})
 
   @doc false
